@@ -9,7 +9,7 @@ import org.testng.Assert;
 
 public class LocationSteps extends BaseTest {
 
-    private LandingPage landingPage = new LandingPage(getDriver());
+    private final LandingPage landingPage = new LandingPage(getDriver());
 
     @Given("I am on the Swiggy landing page")
     public void i_am_on_the_swiggy_landing_page() {

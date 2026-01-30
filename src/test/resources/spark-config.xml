@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extentreports>
+    <configuration>
+        <!-- Minimal Spark reporter configuration to avoid FileNotFoundException -->
+        <theme>standard</theme>
+        <encoding>utf-8</encoding>
+        <documentTitle>Swiggy Automation Report</documentTitle>
+        <reportName>Swiggy Automation - Spark Report</reportName>
+        <protocol>https</protocol>
+    </configuration>
+</extentreports>

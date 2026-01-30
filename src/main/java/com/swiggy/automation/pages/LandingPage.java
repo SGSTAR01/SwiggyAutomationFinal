@@ -13,14 +13,12 @@ public class LandingPage {
     private WebDriver driver;
     private WaitUtils waitUtils;
 
-    // Dummy Locators - UPDATE THESE
-    @FindBy(xpath = "//input[@id='location']") // Placeholder
+
+    @FindBy(xpath = "//input[@id='location']")
     private WebElement locationInput;
 
-    @FindBy(xpath = "//button[@id='find-restaurants']") // Placeholder
-    private WebElement findFoodButton;
 
-    @FindBy(xpath = "//div[@class='suggestions']") // Placeholder
+    @FindBy(xpath = "//div[@role='button' and @tabindex='2']")
     private WebElement firstSuggestion;
 
     public LandingPage(WebDriver driver) {
@@ -30,6 +28,9 @@ public class LandingPage {
     }
 
     public void enterLocation(String location) {
+
+        waitUtils.waitForVisibility(locationInput).clear();
+        System.out.println(locationInput.getText());
         waitUtils.waitForVisibility(locationInput).sendKeys(location);
         // data-testid="address-pl-input"
         // Logic to select from dropdown could go here
@@ -39,11 +40,4 @@ public class LandingPage {
         waitUtils.waitForClickability(firstSuggestion).click();
     }
 
-    public void clickFindFood() {
-        waitUtils.waitForClickability(findFoodButton).click();
-    }
-
-    public String getTitle() {
-        return driver.getTitle();
-    }
 }

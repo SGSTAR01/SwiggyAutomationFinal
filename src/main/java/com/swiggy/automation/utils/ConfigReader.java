@@ -25,4 +25,24 @@ public class ConfigReader {
         }
         return properties.getProperty(key);
     }
+
+    public static int getIntProperty(String key, int defaultValue) {
+        String val = getProperty(key);
+        if (val == null || val.isEmpty()) {
+            return defaultValue;
+        }
+        try {
+            return Integer.parseInt(val);
+        } catch (NumberFormatException nfe) {
+            return defaultValue;
+        }
+    }
+
+    public static boolean getBooleanProperty(String key, boolean defaultValue) {
+        String val = getProperty(key);
+        if (val == null || val.isEmpty()) {
+            return defaultValue;
+        }
+        return Boolean.parseBoolean(val);
+    }
 }

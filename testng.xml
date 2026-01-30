@@ -3,7 +3,7 @@
 <suite name="Swiggy Automation Suite" parallel="classes" thread-count="2">
     <test name="Swiggy Tests">
         <classes>
-            <class name="com.swiggy.runner.TestRunner"/>
+            <class name="com.swiggy.automation.runners.TestRunner"/>
         </classes>
     </test>
 </suite>

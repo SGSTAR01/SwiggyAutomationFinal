@@ -7,13 +7,15 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
+import java.util.Objects;
+
 public class SearchSteps extends BaseTest {
 
     private RestaurantListingPage restaurantListingPage = new RestaurantListingPage(getDriver());
 
     @Given("I am on the restaurant listing page")
     public void i_am_on_the_restaurant_listing_page() {
-        if (!getDriver().getCurrentUrl().contains("restaurants")) {
+        if (!Objects.requireNonNull(getDriver().getCurrentUrl()).contains("restaurants")) {
             getDriver().get("https://www.swiggy.com/restaurants");
         }
     }

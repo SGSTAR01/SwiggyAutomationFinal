@@ -1,6 +1,9 @@
 package com.swiggy.automation.pages;
 
 import com.swiggy.automation.utils.WaitUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,20 +13,23 @@ import java.time.Duration;
 
 public class RestaurantListingPage {
 
+    private static final Logger LOGGER = LogManager.getLogger(RestaurantListingPage.class);
     private WebDriver driver;
     private WaitUtils waitUtils;
 
-    // Dummy Locators - UPDATE THESE
-    @FindBy(xpath = "//input[@placeholder='Search for restaurants and food']") // Placeholder
+    @FindBy(xpath = "//span[text()='Search']")
+    private WebElement searchButton;
+
+    @FindBy(xpath = "//input[@placeholder='Search for restaurants and food']")
     private WebElement searchInput;
 
-    @FindBy(xpath = "//div[@class='filter-veg']") // Placeholder
+    @FindBy(xpath = "//button[text()='Veg']")
     private WebElement vegFilterToggle;
 
-    @FindBy(xpath = "//div[@class='restaurant-item']") // Placeholder
+    @FindBy(xpath = "//div[text()='More Details'][1]")
     private WebElement firstRestaurant;
 
-    @FindBy(xpath = "//button[contains(text(), 'Add')]") // Placeholder
+    @FindBy(xpath = "//div[@role='dialog']//div[text()='']")
     private WebElement firstAddItemButton;
 
     public RestaurantListingPage(WebDriver driver) {
@@ -33,11 +39,13 @@ public class RestaurantListingPage {
     }
 
     public void searchForItem(String item) {
-        waitUtils.waitForVisibility(searchInput).sendKeys(item);
-        // Might need to press enter or click a search icon
+        LOGGER.info("Searching for item: {}", item);
+        waitUtils.waitForClickability(searchButton).click();
+        waitUtils.waitForVisibility(searchInput).sendKeys(item, Keys.ENTER);
     }
 
     public void applyVegFilter() {
+        LOGGER.info("Applying veg filter");
         waitUtils.waitForClickability(vegFilterToggle).click();
     }
 
@@ -47,6 +55,9 @@ public class RestaurantListingPage {
     }
 
     public void addFirstItemToCart() {
+        LOGGER.info("Adding first restaurant's first item to cart");
+        waitUtils.waitForClickability(firstRestaurant).click();
         waitUtils.waitForClickability(firstAddItemButton).click();
+        LOGGER.info("Add to cart click performed");
     }
 }
